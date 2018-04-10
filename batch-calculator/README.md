@@ -12,7 +12,7 @@ Just fill up input data information and run.
 
 ## example use case
 
-Example code from directly from Mikes video: https://youtu.be/rX0ItVEVjHc?t=39m42s
+Example code directly from Mikes video: https://youtu.be/rX0ItVEVjHc?t=39m42s
 ```c++
 struct FooUpdateIn {     // 12 bytes x count(32) = 384 = 64 x 6
   float m_Velocity[2];
@@ -28,8 +28,8 @@ void UpdateFoos(const FooUpdateIn * in, size_t count. FooUpdateOut * out, float 
   for (size i = 0; i < count; i++) {
     float mag = sqrt(
       in[i].m_Velocity[0] * in[i].m_Velocity[0] +
-      in[i].m_Velocity[1] * in[i].m_Velocity[1]);
-      out[i].m_Foo = in[i].m_Foo + mag +f;
+      in[i].m_Velocity[1] * in[i].m_Velocity[1]);     // (6/32)=~5.33 loop/cache line
+      out[i].m_Foo = in[i].m_Foo + mag +f;            // sqrt + math = ~40x5.33= 213.33 cycles/cache line
   }
 }
 ```
