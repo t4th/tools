@@ -1,57 +1,41 @@
 # batch calculator
 
-Calculate number of buffers for optimal cache friendly data grouping.
+Example of making code faster by restructuring data access code.
 
 ## why
 
-After watching Mike Acton video about data oriented programing i tested what he preached and this small tool is one of follow up prove of concept result.
+After watching Mike Acton video about data oriented programing i tested what he preached and this small program is one of follow up prove of concept result. As poc, this is draft code - no checks, no const correctness, no nothing :). Things that might cause problems are commented.
 
 ## how
 
-Just fill up input data information and run.
-
-## example use case
-
-Example code directly from Mikes video: https://youtu.be/rX0ItVEVjHc?t=39m42s
+Build and run with parameter: 0 for no optimization and non-zero for optimization run.
+Code is pretty straight forrward. To increase scale for faster/slower targets adapt buffer count:
 ```c++
-struct FooUpdateIn {     // 12 bytes x count(32) = 384 = 64 x 6
-  float m_Velocity[2];
-  float m_Foo;
-};
+#define BUFFER_COUNT 10000000
+```
+ or cache line adapted batch size:
+ ```c++
+RunOptimized(32); // batch size 32
+```
+ 
+## example output
 
-struct FooUpdateOut {    // 4 bytes x count(32) = 128 = 64 x 2
-  float m_Foo;
-};
-
-void UpdateFoos(const FooUpdateIn * in, size_t count. FooUpdateOut * out, float f)
-{
-  for (size i = 0; i < count; i++) {
-    float mag = sqrt(
-      in[i].m_Velocity[0] * in[i].m_Velocity[0] +
-      in[i].m_Velocity[1] * in[i].m_Velocity[1]);     // (6/32)=~5.33 loop/cache line
-      out[i].m_Foo = in[i].m_Foo + mag +f;            // sqrt + math = ~40x5.33= 213.33 cycles/cache line
-  }
-}
+run non-optimized
+```
+C:\Projects\github\tools\Debug>example1-non-optimized.exe 0
+run non-optimized
+time elapsed: 0.0873855
 ```
 
-Modify buffer and cache line size in bytes in main.cpp
-```c++
-    /* inputs in bytes*/
-    unsigned input_data_size = 12;
-    unsigned output_data_size = 4;
-    unsigned cache_line_size = 64;
+Typical non-optimized time is between 0.083 - 0.089 ticks due to scheduling and other independant stuff.
+
+run optimized
+```
+C:\Projects\github\tools\Debug>example1-non-optimized.exe 1
+run optimized
+time elapsed: 0.03666
 ```
 
-and this is the result:
-```
-input_data_size =  12 bytes
-output_data_size = 4 bytes
-cache_line_size =  64 bytes
-----result---------
-batch size = 16
-input data size =  192 bytes
-output data size = 64 bytes
-Press any key to continue . . .
-```
+Typical optimized time is between 0.033 - 0.037 ticks.
 
-And now you can batch (group) buffers together in array of 16 (or multiply of 16 like case in video) to fill 100% cache lines.
+So thats almost ~2.5x time less with almost no effort, other than restructuring data access.
