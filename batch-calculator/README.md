@@ -23,7 +23,7 @@ struct FooUpdateOut {    // 4 bytes x count(32) = 128 = 64 x 2
   float m_Foo;
 };
 
-void UpdateFoos(const volatile FooUpdateIn * in, size_t count, volatile FooUpdateOut * out, float f)
+void UpdateFoos(const FooUpdateIn * in, size_t count, FooUpdateOut * out, float f)
 {
     for (size_t i = 0; i < count; i++) {
         float mag = sqrt(
