@@ -23,14 +23,14 @@ struct FooUpdateOut {    // 4 bytes x count(32) = 128 = 64 x 2
   float m_Foo;
 };
 
-void UpdateFoos(const FooUpdateIn * in, size_t count. FooUpdateOut * out, float f)
+void UpdateFoos(const volatile FooUpdateIn * in, size_t count, volatile FooUpdateOut * out, float f)
 {
-  for (size i = 0; i < count; i++) {
-    float mag = sqrt(
-      in[i].m_Velocity[0] * in[i].m_Velocity[0] +
-      in[i].m_Velocity[1] * in[i].m_Velocity[1]);     // (6/32)=~5.33 loop/cache line
-      out[i].m_Foo = in[i].m_Foo + mag +f;            // sqrt + math = ~40x5.33= 213.33 cycles/cache line
-  }
+    for (size_t i = 0; i < count; i++) {
+        float mag = sqrt(
+            in[i].m_Velocity[0] * in[i].m_Velocity[0] +
+            in[i].m_Velocity[1] * in[i].m_Velocity[1]);     // (6/32)=~5.33 loop/cache line
+        out[i].m_Foo = in[i].m_Foo + mag + f;            // sqrt + math = ~40x5.33= 213.33 cycles/cache line
+    }
 }
 ```
 
