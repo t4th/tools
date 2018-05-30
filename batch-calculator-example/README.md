@@ -8,26 +8,26 @@ After watching Mike Acton video about data oriented programing i tested what he 
 
 ## how
 
-Build and run with parameter: 0 for no optimization and non-zero for optimization run.
+Build and run without argument for no optimization and with any argument for optimization run.
 Code is pretty straight forrward. To increase scale for faster/slower targets adapt buffer count:
 ```c++
 #define BUFFER_COUNT 10000000
 ```
  or cache line adapted batch size:
  ```c++
-RunOptimized(32); // batch size 32
+#define BATCH_SIZE   32
 ```
  
 ## example output
 
 run non-optimized
 ```
-C:\Projects\github\tools\Debug>example1-non-optimized.exe 0
+C:\Projects\github\tools\Debug>example1-non-optimized.exe
 run non-optimized
 time elapsed: 0.0873855
 ```
 
-Typical non-optimized time is between 0.083 - 0.089 ticks due to scheduling and other independant stuff.
+Typical non-optimized time is between 0.083 - 0.089 ticks on my pc due to scheduling and other independant stuff.
 
 run optimized
 ```
