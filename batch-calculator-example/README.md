@@ -1,6 +1,6 @@
 # batch calculator
 
-Example of making code faster by restructuring data access code.
+Example of making program faster by restructuring data access.
 
 ## why
 
