@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cache_calc", "batch-calculator\cache_calc.vcxproj", "{2687F5D5-2DBF-49BF-90C8-49ECC2915AF8}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "example1-non-optimized", "batch-calculator-example\example1-non-optimized.vcxproj", "{C586D36E-862D-48B7-BA45-B97AB0CF8C63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		{2687F5D5-2DBF-49BF-90C8-49ECC2915AF8}.Debug|Win32.Build.0 = Debug|Win32
 		{2687F5D5-2DBF-49BF-90C8-49ECC2915AF8}.Release|Win32.ActiveCfg = Release|Win32
 		{2687F5D5-2DBF-49BF-90C8-49ECC2915AF8}.Release|Win32.Build.0 = Release|Win32
-		{C586D36E-862D-48B7-BA45-B97AB0CF8C63}.Debug|Win32.ActiveCfg = Debug|Win32
-		{C586D36E-862D-48B7-BA45-B97AB0CF8C63}.Debug|Win32.Build.0 = Debug|Win32
-		{C586D36E-862D-48B7-BA45-B97AB0CF8C63}.Release|Win32.ActiveCfg = Release|Win32
-		{C586D36E-862D-48B7-BA45-B97AB0CF8C63}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
